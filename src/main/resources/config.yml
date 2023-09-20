@@ -1,0 +1,18 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #    
+#                                                                                               #
+#                                            CGACG                                              #
+#                                     Created by eliotesta98                                    #
+#                                                                                               #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #   
+
+Configuration:
+
+  # Set whether various plugins should be hooked into (i will also check if is enabled).
+  Hooks:
+    RevEnchants: false
+
+Debug:
+  # Enabled time execution
+  Enabled: false
+  # Disabled time execution
+  Disabled: false
