@@ -23,12 +23,12 @@ public class Main extends JavaPlugin {
         Main.instance = this;
 
         getServer().getConsoleSender()
-                .sendMessage("\n§a     ____    ____      _       ____    ____ \n" +
+                .sendMessage("\n§a   ____    ____      _       ____    ____ \n" +
                         "  / ___|  / ___|    / \\     / ___|  / ___|\n" +
                         " | |     | |  _    / _ \\   | |     | |  _ \n" +
                         " | |___  | |_| |  / ___ \\  | |___  | |_| |\n" +
                         "  \\____|  \\____| /_/   \\_\\  \\____|  \\____|\n"
-                        + "\n§e© Developed by §feliotesta98 §ewith §4<3 \r\n \r\n \r\n");
+                        + "\n§e© Developed by §feliotesta98 §ewith §4<3 \r\n \r\n");
 
         this.getServer().getConsoleSender().sendMessage("§6Loading config...");
 
