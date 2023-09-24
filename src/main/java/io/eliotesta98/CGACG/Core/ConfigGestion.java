@@ -21,8 +21,9 @@ public class ConfigGestion {
             if (hook.equalsIgnoreCase("RevEnchants")) {
                 hooks.put(hook, file.getBoolean("Configuration.Hooks." + hook + ".Enabled"));
                 regionFlags.addAll(file.getStringList("Configuration.Hooks." + hook + ".RegionFlags"));
+            } else {
+                hooks.put(hook, file.getBoolean("Configuration.Hooks." + hook));
             }
-            hooks.put(hook, file.getBoolean("Configuration.Hooks." + hook));
         }
 
     }
