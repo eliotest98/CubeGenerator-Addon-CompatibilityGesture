@@ -9,10 +9,21 @@ Configuration:
 
   # Set whether various plugins should be hooked into (i will also check if is enabled).
   Hooks:
-    RevEnchants: false
+    RevEnchants:
+      Enabled: false
+      RegionFlags:
+        - "RevEnchants-Mine:ALLOW"
+        - "RevEnchants-Explosive:ALLOW"
+        - "RevEnchants-JackHammer:ALLOW"
+        - "RevEnchants-ThorHammer:ALLOW"
+        - "RevEnchants-Laser:ALLOW"
+        - "RevEnchants-MeteorShower:ALLOW"
+        - "RevEnchants-BigBang:ALLOW"
 
 Debug:
   # Enabled time execution
   Enabled: false
   # Disabled time execution
   Disabled: false
+  # Compatibility debug
+  Compatibility: false

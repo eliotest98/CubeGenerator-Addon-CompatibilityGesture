@@ -1,12 +1,15 @@
 package io.eliotesta98.CGACG.Core;
 
 import org.bukkit.configuration.file.FileConfiguration;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ConfigGestion {
 
     private HashMap<String, Boolean> hooks = new HashMap<>();
     private HashMap<String, Boolean> debug = new HashMap<>();
+    private ArrayList<String> regionFlags = new ArrayList<>();
 
     public ConfigGestion(FileConfiguration file) {
 
@@ -15,6 +18,10 @@ public class ConfigGestion {
         }
 
         for (String hook : file.getConfigurationSection("Configuration.Hooks").getKeys(false)) {
+            if (hook.equalsIgnoreCase("RevEnchants")) {
+                hooks.put(hook, file.getBoolean("Configuration.Hooks." + hook + ".Enabled"));
+                regionFlags.addAll(file.getStringList("Configuration.Hooks." + hook + ".RegionFlags"));
+            }
             hooks.put(hook, file.getBoolean("Configuration.Hooks." + hook));
         }
 
@@ -36,11 +43,20 @@ public class ConfigGestion {
         this.debug = debug;
     }
 
+    public ArrayList<String> getRegionFlags() {
+        return regionFlags;
+    }
+
+    public void setRegionFlags(ArrayList<String> regionFlags) {
+        this.regionFlags = regionFlags;
+    }
+
     @Override
     public String toString() {
         return "ConfigGestion{" +
                 "hooks=" + hooks +
                 ", debug=" + debug +
+                ", regionFlags=" + regionFlags +
                 '}';
     }
 }
