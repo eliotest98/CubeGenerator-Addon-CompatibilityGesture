@@ -11,6 +11,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import io.eliotesta98.CGACG.Core.Main;
+import io.eliotesta98.CGACG.Utils.ColorUtils;
 import io.eliotesta98.CGACG.Utils.DebugUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -54,7 +55,7 @@ public class WorldGuardUtils {
                 StateFlag stateFlag = (StateFlag) registry.get(split[0]);
                 protectedRegion.setFlag(stateFlag, StateFlag.State.valueOf(split[1]));
             } catch (NullPointerException e) {
-                Bukkit.getServer().getConsoleSender().sendMessage("&cError with a flag set in region! This flag &6" + split[0] + "6c not exist!");
+                Bukkit.getServer().getConsoleSender().sendMessage(ColorUtils.applyColor("&cError with a flag set in region! This flag &6" + split[0] + "6c not exist!"));
                 e.printStackTrace();
             }
         }

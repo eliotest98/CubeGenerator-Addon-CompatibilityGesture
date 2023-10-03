@@ -1,14 +1,18 @@
 package io.eliotesta98.CGACG.Core;
 
+import io.eliotesta98.CGACG.Modules.CubeGenerator.BreakEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.DisbandGeneratorEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.PlaceGeneratorEvent;
+import io.eliotesta98.CGACG.Modules.RevEnchants.JHEvent;
 import io.eliotesta98.CGACG.Utils.*;
 import org.bukkit.plugin.java.*;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -118,6 +122,8 @@ public class Main extends JavaPlugin {
                             .sendMessage("§e[CGACG] §7Added compatibility with RevEnchants.");
                     Bukkit.getServer().getPluginManager().registerEvents(new PlaceGeneratorEvent(), this);
                     Bukkit.getServer().getPluginManager().registerEvents(new DisbandGeneratorEvent(), this);
+                    Bukkit.getServer().getPluginManager().registerEvents(new JHEvent(), this);
+                    Bukkit.getServer().getPluginManager().registerEvents(new BreakEvent(), this);
                 }
             }
         });
