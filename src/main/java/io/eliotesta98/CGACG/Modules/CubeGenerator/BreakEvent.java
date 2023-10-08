@@ -3,10 +3,13 @@ package io.eliotesta98.CGACG.Modules.CubeGenerator;
 import io.eliotesta98.CGACG.Core.Main;
 import io.eliotesta98.CGACG.Modules.RevEnchants.RevEnchantUtils;
 import io.eliotesta98.CGACG.Utils.DebugUtils;
+import me.revils.revenchants.api.RevEnchantsApi;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 
 public class BreakEvent implements Listener {
 
@@ -35,8 +38,12 @@ public class BreakEvent implements Listener {
                 }
             }
             long unbreakingLevel = RevEnchantUtils.getEnchantLevel(RevEnchantUtils.getRevTool(event.getItemInHand()), "Unbreaking");
-            if (unbreakingLevel <= 0) {
-                event.getItemInHand().addUnsafeEnchantment(Enchantment.DURABILITY, -1);
+            if (unbreakingLevel > 0) {
+                if (RevEnchantUtils.give(RevEnchantUtils.chance("Unbreaking", unbreakingLevel))) {
+                    event.getItemInHand().addUnsafeEnchantment(Enchantment.DURABILITY, (int) unbreakingLevel);
+                } else {
+                    event.getItemInHand().removeEnchantment(Enchantment.DURABILITY);
+                }
             }
             if (debug) {
                 debugUtils.addLine("Fortune level: " + fortuneLevel);
@@ -44,7 +51,6 @@ public class BreakEvent implements Listener {
             }
         }
         if (debug) {
-            debugUtils.addLine("");
             debugUtils.debug("CubeBlockBreakEvent");
         }
     }

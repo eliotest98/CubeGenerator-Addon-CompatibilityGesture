@@ -3,7 +3,7 @@ package io.eliotesta98.CGACG.Core;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.BreakEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.DisbandGeneratorEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.PlaceGeneratorEvent;
-import io.eliotesta98.CGACG.Modules.RevEnchants.JHEvent;
+import io.eliotesta98.CGACG.Modules.RevEnchants.*;
 import io.eliotesta98.CGACG.Utils.*;
 import org.bukkit.plugin.java.*;
 
@@ -124,6 +124,7 @@ public class Main extends JavaPlugin {
                     Bukkit.getServer().getPluginManager().registerEvents(new DisbandGeneratorEvent(), this);
                     Bukkit.getServer().getPluginManager().registerEvents(new JHEvent(), this);
                     Bukkit.getServer().getPluginManager().registerEvents(new BreakEvent(), this);
+                    Bukkit.getServer().getPluginManager().registerEvents(new OtherEvents(), this);
                 }
             }
         });

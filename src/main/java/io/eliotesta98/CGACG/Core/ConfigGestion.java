@@ -10,6 +10,7 @@ public class ConfigGestion {
     private HashMap<String, Boolean> hooks = new HashMap<>();
     private HashMap<String, Boolean> debug = new HashMap<>();
     private ArrayList<String> regionFlags = new ArrayList<>();
+    private boolean reciveDropsInInventory;
 
     public ConfigGestion(FileConfiguration file) {
 
@@ -21,6 +22,7 @@ public class ConfigGestion {
             if (hook.equalsIgnoreCase("RevEnchants")) {
                 hooks.put(hook, file.getBoolean("Configuration.Hooks." + hook + ".Enabled"));
                 regionFlags.addAll(file.getStringList("Configuration.Hooks." + hook + ".RegionFlags"));
+                reciveDropsInInventory = file.getBoolean("Configuration.Hooks." + hook + ".ReciveDropsInInventory");
             } else {
                 hooks.put(hook, file.getBoolean("Configuration.Hooks." + hook));
             }
@@ -50,6 +52,14 @@ public class ConfigGestion {
 
     public void setRegionFlags(ArrayList<String> regionFlags) {
         this.regionFlags = regionFlags;
+    }
+
+    public boolean isReciveDropsInInventory() {
+        return reciveDropsInInventory;
+    }
+
+    public void setReciveDropsInInventory(boolean reciveDropsInInventory) {
+        this.reciveDropsInInventory = reciveDropsInInventory;
     }
 
     @Override

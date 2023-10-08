@@ -29,7 +29,11 @@ public class RevEnchantUtils {
 
     public static boolean give(double chance) {
         int number = random.nextInt(100);
-        return number >= chance;
+        return number <= chance;
+    }
+
+    public static String getItemOfItemCollector(String enchant) {
+        return RevEnchantsApi.getEnchantsYml(enchant).getString("Settings.Book.type","AIR");
     }
 
 }
