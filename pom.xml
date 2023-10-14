@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>CGACG</groupId>
 	<artifactId>CGACG</artifactId>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -139,15 +139,15 @@
 			<artifactId>RevEnchantsApi</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/RevEnchantsPlus.jar</systemPath>
+			<systemPath>${project.basedir}/lib/RevEnchantsApi.jar</systemPath>
 		</dependency>
 		<!-- CubeGenerator -->
 		<dependency>
 			<groupId>io.eliotesta98.CubeGenerator</groupId>
 			<artifactId>CubeGeneratorApi</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.2</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/CubeGeneratorApi-1.0.1.jar</systemPath>
+			<systemPath>${project.basedir}/lib/CubeGeneratorApi-1.0.2.jar</systemPath>
 		</dependency>
 	</dependencies>
 </project>

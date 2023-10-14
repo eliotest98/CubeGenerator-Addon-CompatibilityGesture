@@ -3,13 +3,10 @@ package io.eliotesta98.CGACG.Modules.CubeGenerator;
 import io.eliotesta98.CGACG.Core.Main;
 import io.eliotesta98.CGACG.Modules.RevEnchants.RevEnchantUtils;
 import io.eliotesta98.CGACG.Utils.DebugUtils;
-import me.revils.revenchants.api.RevEnchantsApi;
-import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
 
 public class BreakEvent implements Listener {
 

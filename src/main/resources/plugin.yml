@@ -3,7 +3,7 @@ version: maven-version-number
 main: io.eliotesta98.CGACG.Core.Main
 api-version: 1.13
 authors: [ eliotesta98 ]
-softdepend: [ WorldGuard,RevEnchants ]
+softdepend: [ WorldGuard,RevEnchants,RevBackpack ]
 depend: [ CubeGenerator ]
 commands: { }
 permissions: { }

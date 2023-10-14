@@ -1,5 +1,6 @@
 package io.eliotesta98.CGACG.Core;
 
+import io.eliotesta98.CGACG.Modules.CubeGenerator.AddMaterialInventoryEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.BreakEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.DisbandGeneratorEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.PlaceGeneratorEvent;
@@ -117,6 +118,13 @@ public class Main extends JavaPlugin {
                                 .sendMessage("§e[CGACG] §cWorldGuard is not present in your server folder, please install it.");
                         onDisable();
                         return;
+                    }
+                    if (Bukkit.getServer().getPluginManager().isPluginEnabled("RevBackpack")) {
+                        if (getConfigGestion().getHooks().get("RevBackpack")) {
+                            Bukkit.getServer().getConsoleSender()
+                                    .sendMessage("§e[CGACG] §7Added compatibility with RevBackpack.");
+                            Bukkit.getServer().getPluginManager().registerEvents(new AddMaterialInventoryEvent(), this);
+                        }
                     }
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with RevEnchants.");

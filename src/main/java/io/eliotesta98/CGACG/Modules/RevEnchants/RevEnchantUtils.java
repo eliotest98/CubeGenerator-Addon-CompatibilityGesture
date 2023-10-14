@@ -32,8 +32,4 @@ public class RevEnchantUtils {
         return number <= chance;
     }
 
-    public static String getItemOfItemCollector(String enchant) {
-        return RevEnchantsApi.getEnchantsYml(enchant).getString("Settings.Book.type","AIR");
-    }
-
 }

@@ -20,6 +20,8 @@ Configuration:
         - "RevEnchants-MeteorShower:ALLOW"
         - "RevEnchants-BigBang:ALLOW"
       ReciveDropsInInventory: false
+    RevBackpack:
+      Enabled: false
 
 Debug:
   # Enabled time execution
@@ -28,3 +30,5 @@ Debug:
   Disabled: false
   # Compatibility debug
   Compatibility: false
+  # Add Material of CubeGenerator debug
+  AddMaterialInventoryEvent: false
