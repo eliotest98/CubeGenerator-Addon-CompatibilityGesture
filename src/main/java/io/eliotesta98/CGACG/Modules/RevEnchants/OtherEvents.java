@@ -2,6 +2,7 @@ package io.eliotesta98.CGACG.Modules.RevEnchants;
 
 import io.eliotesta98.CGACG.Core.Main;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.CubeGeneratorUtils;
+import io.eliotesta98.CGACG.Modules.RevBackpack.RevBackpackUtils;
 import io.eliotesta98.CGACG.Utils.DebugUtils;
 import io.eliotesta98.CubeGenerator.api.CubeGeneratorAPI;
 import me.revils.revenchants.events.*;
@@ -18,6 +19,7 @@ public class OtherEvents implements Listener {
 
     private static final boolean debug = Main.instance.getConfigGestion().getDebug().get("Compatibility");
     private final boolean reciveDropsInInventory = Main.instance.getConfigGestion().isReciveDropsInInventory();
+    private final boolean revBackpackEnabled = Main.instance.getConfigGestion().getHooks().get("RevBackPack");
     private final DebugUtils debugUtils;
 
     public OtherEvents() {
@@ -221,6 +223,9 @@ public class OtherEvents implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onDropInInventoryEvent(ReceiveDropsEvent event) {
         if (reciveDropsInInventory) {
+            if (revBackpackEnabled) {
+                RevBackpackUtils.receiveDropEventGesture(event.getPlayer(), event);
+            }
             return;
         }
         if (generators.containsKey(event.getPlayer().getName())) {

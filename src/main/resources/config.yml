@@ -20,7 +20,7 @@ Configuration:
         - "RevEnchants-MeteorShower:ALLOW"
         - "RevEnchants-BigBang:ALLOW"
       ReciveDropsInInventory: false
-    RevBackpack:
+    RevBackPack:
       Enabled: false
 
 Debug:

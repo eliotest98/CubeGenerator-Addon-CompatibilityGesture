@@ -1,6 +1,6 @@
 package io.eliotesta98.CGACG.Core;
 
-import io.eliotesta98.CGACG.Modules.CubeGenerator.AddMaterialInventoryEvent;
+import io.eliotesta98.CGACG.Modules.RevBackpack.AddMaterialInventoryEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.BreakEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.DisbandGeneratorEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.PlaceGeneratorEvent;
@@ -119,10 +119,10 @@ public class Main extends JavaPlugin {
                         onDisable();
                         return;
                     }
-                    if (Bukkit.getServer().getPluginManager().isPluginEnabled("RevBackpack")) {
-                        if (getConfigGestion().getHooks().get("RevBackpack")) {
+                    if (Bukkit.getServer().getPluginManager().isPluginEnabled("RevBackPack")) {
+                        if (getConfigGestion().getHooks().get("RevBackPack")) {
                             Bukkit.getServer().getConsoleSender()
-                                    .sendMessage("§e[CGACG] §7Added compatibility with RevBackpack.");
+                                    .sendMessage("§e[CGACG] §7Added compatibility with RevBackPack.");
                             Bukkit.getServer().getPluginManager().registerEvents(new AddMaterialInventoryEvent(), this);
                         }
                     }
