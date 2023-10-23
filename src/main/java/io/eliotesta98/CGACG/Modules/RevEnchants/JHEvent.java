@@ -12,6 +12,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+
 public class JHEvent implements Listener {
 
     private static final boolean debug = Main.instance.getConfigGestion().getDebug().get("Compatibility");
@@ -27,6 +29,8 @@ public class JHEvent implements Listener {
         if (debug) {
             debugUtils.addLine("RevEnchants Jack Hammer Event");
             debugUtils.addLine("Item Type used: " + itemInHand.getType());
+            debugUtils.addLine("items Size:" + event.getBlocks().size());
+            debugUtils.addLine("List of items:" + event.getBlocks().toString());
         }
         for (Object onj : event.getBlocks()) {
             Block block = (Block) onj;
@@ -57,17 +61,17 @@ public class JHEvent implements Listener {
                             }
                             continue;
                         }
-                        break;
+                        event.setBlocks(new ArrayList<>());
+                        continue;
                     default:
                         if (debug) {
                             debugUtils.addLine("");
                             debugUtils.addLine("The block isn't a generator block");
                         }
-                        break;
+                        continue;
                 }
             }
         }
-        event.setCancelled(true);
         if (debug) {
             debugUtils.addLine("");
             debugUtils.debug("RevEnchants Break");
