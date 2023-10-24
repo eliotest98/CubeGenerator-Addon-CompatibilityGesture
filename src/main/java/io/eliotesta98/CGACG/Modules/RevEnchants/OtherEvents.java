@@ -254,5 +254,4 @@ public class OtherEvents implements Listener {
             debugUtils.debug("RevEnchants Break " + event.getEventName());
         }
     }
-
 }
