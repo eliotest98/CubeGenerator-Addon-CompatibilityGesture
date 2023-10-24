@@ -225,7 +225,15 @@ public class OtherEvents implements Listener {
         if (reciveDropsInInventory) {
             if (revBackpackEnabled) {
                 RevBackpackUtils.receiveDropEventGesture(event.getPlayer(), event);
+                debugUtils.addLine("");
+                debugUtils.addLine("The block mined goes to the RevBackpack, maybe ...");
+            } else {
+                debugUtils.addLine("");
+                debugUtils.addLine("The block mined was ignored...");
             }
+
+            debugUtils.addLine("");
+            debugUtils.debug("ReceiveDropsEvent Break");
             return;
         }
         if (generators.containsKey(event.getPlayer().getName())) {
@@ -238,8 +246,22 @@ public class OtherEvents implements Listener {
                     CubeGeneratorAPI.addBlockToInventory(event.getPlayer(), itemToGive, generatorId);
                 }
             }
+            debugUtils.addLine("");
+            debugUtils.addLine("The block mined is an internal block of a generator");
+            debugUtils.addLine("");
+            debugUtils.addLine("Generators: " + generators.toString());
+
+            debugUtils.addLine("");
+            debugUtils.debug("ReceiveDropsEvent Break");
             event.setCancelled(true);
+            return;
         }
+
+        debugUtils.addLine("");
+        debugUtils.addLine("The block mined is not a generator");
+
+        debugUtils.addLine("");
+        debugUtils.debug("ReceiveDropsEvent Break");
     }
 
 }

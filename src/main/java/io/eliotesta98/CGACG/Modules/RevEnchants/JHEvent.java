@@ -32,6 +32,7 @@ public class JHEvent implements Listener {
             debugUtils.addLine("items Size:" + event.getBlocks().size());
             debugUtils.addLine("List of items:" + event.getBlocks().toString());
         }
+        ArrayList<Block> blocks = new ArrayList<>();
         for (Object onj : event.getBlocks()) {
             Block block = (Block) onj;
             if (debug) {
@@ -59,19 +60,19 @@ public class JHEvent implements Listener {
                                 debugUtils.addLine("");
                                 debugUtils.addLine("Event cancelled from doBlockBreak api of CubeGenerator");
                             }
-                            continue;
                         }
-                        event.setBlocks(new ArrayList<>());
                         continue;
                     default:
                         if (debug) {
                             debugUtils.addLine("");
                             debugUtils.addLine("The block isn't a generator block");
                         }
+                        blocks.add(block);
                         continue;
                 }
             }
         }
+        event.setBlocks(blocks);
         if (debug) {
             debugUtils.addLine("");
             debugUtils.debug("RevEnchants Break");
