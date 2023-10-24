@@ -19,9 +19,9 @@ Configuration:
         - "RevEnchants-Laser:ALLOW"
         - "RevEnchants-MeteorShower:ALLOW"
         - "RevEnchants-BigBang:ALLOW"
-      ReciveDropsInInventory: false
-    RevBackPack:
-      Enabled: false
+      # Set whether the plugin should drop the items like a normal RevEnchants mine,
+      # if false, the plugin will drop the items like a normal CubeGenerator.
+      DropsLikeRevEnchantsMine: false
 
 Debug:
   # Enabled time execution

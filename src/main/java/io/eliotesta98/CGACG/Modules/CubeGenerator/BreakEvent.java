@@ -47,6 +47,7 @@ public class BreakEvent implements Listener {
                 debugUtils.addLine("Unbreaking level: " + unbreakingLevel);
             }
         }
+
         if (debug) {
             debugUtils.debug("CubeBlockBreakEvent");
         }

@@ -5,7 +5,7 @@ import io.eliotesta98.CGACG.Modules.CubeGenerator.CubeGeneratorUtils;
 import io.eliotesta98.CGACG.Utils.DebugUtils;
 import io.eliotesta98.CubeGenerator.api.CubeGeneratorAPI;
 import me.revils.revenchants.events.JackHammerEvent;
-import org.bukkit.Material;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -24,58 +24,70 @@ public class JHEvent implements Listener {
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onJackHammer(JackHammerEvent event) {
+    public void onJackHammer(JackHammerEvent event) throws Exception {
+
         final ItemStack itemInHand = event.getPlayer().getInventory().getItemInMainHand();
         if (debug) {
             debugUtils.addLine("RevEnchants Jack Hammer Event");
             debugUtils.addLine("Item Type used: " + itemInHand.getType());
             debugUtils.addLine("items Size:" + event.getBlocks().size());
             debugUtils.addLine("List of items:" + event.getBlocks().toString());
+            debugUtils.addLine("Point 1:" + event.getPoint1());
+            debugUtils.addLine("Point 2:" + event.getPoint2());
         }
-        ArrayList<Block> blocks = new ArrayList<>();
-        for (Object onj : event.getBlocks()) {
-            Block block = (Block) onj;
-            if (debug) {
-                debugUtils.addLine("Block Mined at location: " + block.getLocation());
-            }
-            if (block.getType() != Material.AIR) {
-                String isGenerator = CubeGeneratorUtils.isGeneratorBlock(block);
-                switch (isGenerator) {
-                    case "REMOVED_GENERATOR_BLOCK":
-                    case "REMOVED_FRAME":
-                    case "FRAME":
-                        if (debug) {
-                            debugUtils.addLine("");
-                            debugUtils.addLine("The block mined is a " + isGenerator);
-                            debugUtils.addLine("Event cancelled");
-                        }
-                        continue;
-                    case "GENERATOR_BLOCK":
-                        if (debug) {
-                            debugUtils.addLine("");
-                            debugUtils.addLine("The block mined is an internal block of a generator");
-                        }
-                        if (!CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName())) {
-                            if (debug) {
-                                debugUtils.addLine("");
-                                debugUtils.addLine("Event cancelled from doBlockBreak api of CubeGenerator");
-                            }
-                        }
-                        continue;
-                    default:
-                        if (debug) {
-                            debugUtils.addLine("");
-                            debugUtils.addLine("The block isn't a generator block");
-                        }
-                        blocks.add(block);
-                        continue;
-                }
-            }
+        if (event.getPoint1().getBlockY() != event.getPoint2().getBlockY()) {
+            throw new Exception("The two points must be on the same Y level");
         }
-        event.setBlocks(blocks);
-        if (debug) {
-            debugUtils.addLine("");
-            debugUtils.debug("RevEnchants Break");
+
+        if (!event.getBlocks().isEmpty()) {
+            Block block = event.getBlocks().get(0);
+            String isGenerator = CubeGeneratorUtils.isGeneratorBlock(block);
+            switch (isGenerator) {
+                case "REMOVED_GENERATOR_BLOCK":
+                case "REMOVED_FRAME":
+                case "FRAME":
+                    if (debug) {
+                        debugUtils.addLine("");
+                        debugUtils.addLine("The block mined is a " + isGenerator);
+                        debugUtils.addLine("Event cancelled");
+
+                        debugUtils.addLine("");
+                        debugUtils.debug("RevEnchants Break");
+                    }
+                    event.setCancelled(true);
+                    break;
+                case "GENERATOR_BLOCK":
+                    if (debug) {
+                        debugUtils.addLine("");
+                        debugUtils.addLine("The block mined is an internal block of a generator");
+                    }
+                    Location one = event.getPoint1();
+                    Location two = event.getPoint2();
+
+                    int minX = Math.min(one.getBlockX(), two.getBlockX());
+                    int minZ = Math.min(one.getBlockZ(), two.getBlockZ());
+                    int y = one.getBlockY();
+                    int maxX = Math.max(one.getBlockX(), two.getBlockX());
+                    int maxZ = Math.max(one.getBlockZ(), two.getBlockZ());
+                    for (int x = minX; x <= maxX; x++) {
+                        for (int z = minZ; z <= maxZ; z++) {
+                            CubeGeneratorAPI.doBlockBreak(one.getWorld().getBlockAt(x, y, z), itemInHand, event.getPlayer().getName());
+                        }
+                    }
+                    event.setBlocks(new ArrayList<>());
+                    event.setCancelled(true);
+                    break;
+                default:
+                    if (debug) {
+                        debugUtils.addLine("");
+                        debugUtils.addLine("The block isn't a generator block: " + block.toString());
+
+                        debugUtils.addLine("");
+                        debugUtils.debug("RevEnchants Break");
+                    }
+                    break;
+            }
+
         }
     }
 

@@ -1,6 +1,5 @@
 package io.eliotesta98.CGACG.Core;
 
-import io.eliotesta98.CGACG.Modules.RevBackpack.AddMaterialInventoryEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.BreakEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.DisbandGeneratorEvent;
 import io.eliotesta98.CGACG.Modules.CubeGenerator.PlaceGeneratorEvent;
@@ -119,15 +118,12 @@ public class Main extends JavaPlugin {
                         onDisable();
                         return;
                     }
-                    if (Bukkit.getServer().getPluginManager().isPluginEnabled("RevBackPack")) {
-                        if (getConfigGestion().getHooks().get("RevBackPack")) {
-                            Bukkit.getServer().getConsoleSender()
-                                    .sendMessage("§e[CGACG] §7Added compatibility with RevBackPack.");
-                            Bukkit.getServer().getPluginManager().registerEvents(new AddMaterialInventoryEvent(), this);
-                        }
-                    }
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with RevEnchants.");
+
+                    if(getConfigGestion().isDropsLikeRevEnchantsMine()) {
+                        Bukkit.getServer().getPluginManager().registerEvents(new DropsLikeRevEnchantsMine(), this);
+                    }
                     Bukkit.getServer().getPluginManager().registerEvents(new PlaceGeneratorEvent(), this);
                     Bukkit.getServer().getPluginManager().registerEvents(new DisbandGeneratorEvent(), this);
                     Bukkit.getServer().getPluginManager().registerEvents(new JHEvent(), this);
