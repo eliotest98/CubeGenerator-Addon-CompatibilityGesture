@@ -141,14 +141,6 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/RevEnchantsApi.jar</systemPath>
 		</dependency>
-		<!-- RevBackPack -->
-		<dependency>
-			<groupId>me.revils.revbackpack</groupId>
-			<artifactId>RevBackPackApi</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/RevBackPackApi.jar</systemPath>
-		</dependency>
 		<!-- CubeGenerator -->
 		<dependency>
 			<groupId>io.eliotesta98.CubeGenerator</groupId>
