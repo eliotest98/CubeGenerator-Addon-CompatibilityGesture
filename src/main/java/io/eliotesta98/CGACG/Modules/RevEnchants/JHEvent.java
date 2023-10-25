@@ -1,7 +1,6 @@
 package io.eliotesta98.CGACG.Modules.RevEnchants;
 
 import io.eliotesta98.CGACG.Core.Main;
-import io.eliotesta98.CGACG.Modules.CubeGenerator.CubeGeneratorUtils;
 import io.eliotesta98.CGACG.Utils.DebugUtils;
 import io.eliotesta98.CubeGenerator.api.CubeGeneratorAPI;
 import me.revils.revenchants.events.JackHammerEvent;
@@ -25,7 +24,6 @@ public class JHEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onJackHammer(JackHammerEvent event) throws Exception {
-
         final ItemStack itemInHand = event.getPlayer().getInventory().getItemInMainHand();
         if (debug) {
             debugUtils.addLine("RevEnchants Jack Hammer Event");
@@ -41,7 +39,7 @@ public class JHEvent implements Listener {
 
         if (!event.getBlocks().isEmpty()) {
             Block block = event.getBlocks().get(0);
-            String isGenerator = CubeGeneratorUtils.isGeneratorBlock(block);
+            String isGenerator = CubeGeneratorAPI.isAGeneratorBlock(block);
             switch (isGenerator) {
                 case "REMOVED_GENERATOR_BLOCK":
                 case "REMOVED_FRAME":
@@ -74,8 +72,8 @@ public class JHEvent implements Listener {
                             CubeGeneratorAPI.doBlockBreak(one.getWorld().getBlockAt(x, y, z), itemInHand, event.getPlayer().getName());
                         }
                     }
-                    event.setBlocks(new ArrayList<>());
                     event.setCancelled(true);
+                    event.setBlocks(new ArrayList<>());
                     break;
                 default:
                     if (debug) {
@@ -87,7 +85,6 @@ public class JHEvent implements Listener {
                     }
                     break;
             }
-
         }
     }
 

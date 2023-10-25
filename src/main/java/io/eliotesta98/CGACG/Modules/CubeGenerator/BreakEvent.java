@@ -26,14 +26,6 @@ public class BreakEvent implements Listener {
             if (debug) {
                 debugUtils.addLine("Item in hand is a RevTool pickaxe");
             }
-            long fortuneLevel = RevEnchantUtils.getEnchantLevel(RevEnchantUtils.getRevTool(event.getItemInHand()), "Fortune");
-            if (fortuneLevel > 0) {
-                if (RevEnchantUtils.give(RevEnchantUtils.chance("Fortune", fortuneLevel))) {
-                    event.getItemInHand().addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, (int) fortuneLevel);
-                } else {
-                    event.getItemInHand().removeEnchantment(Enchantment.LOOT_BONUS_BLOCKS);
-                }
-            }
             long unbreakingLevel = RevEnchantUtils.getEnchantLevel(RevEnchantUtils.getRevTool(event.getItemInHand()), "Unbreaking");
             if (unbreakingLevel > 0) {
                 if (RevEnchantUtils.give(RevEnchantUtils.chance("Unbreaking", unbreakingLevel))) {
@@ -43,7 +35,6 @@ public class BreakEvent implements Listener {
                 }
             }
             if (debug) {
-                debugUtils.addLine("Fortune level: " + fortuneLevel);
                 debugUtils.addLine("Unbreaking level: " + unbreakingLevel);
             }
         }
