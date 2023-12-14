@@ -1,4 +1,4 @@
-package io.eliotesta98.CGACG.Modules.CubeGenerator;
+package io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator;
 
 import io.eliotesta98.CGACG.Core.Main;
 import io.eliotesta98.CGACG.Modules.RevEnchants.RevEnchantUtils;

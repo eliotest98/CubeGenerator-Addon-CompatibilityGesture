@@ -22,6 +22,7 @@ Configuration:
       # Set whether the plugin should drop the items like a normal RevEnchants mine,
       # if false, the plugin will drop the items like a normal CubeGenerator.
       DropsLikeRevEnchantsMine: false
+    PlotSquared7: false
 
 Debug:
   # Enabled time execution

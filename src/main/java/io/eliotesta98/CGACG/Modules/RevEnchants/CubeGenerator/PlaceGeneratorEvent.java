@@ -1,6 +1,6 @@
-package io.eliotesta98.CGACG.Modules.CubeGenerator;
+package io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator;
 
-import io.eliotesta98.CGACG.Modules.WorldGuard.WorldGuardUtils;
+import io.eliotesta98.CGACG.Modules.RevEnchants.WorldGuard.WorldGuardUtils;
 import io.eliotesta98.CGACG.Utils.AnglesSearcher;
 import io.eliotesta98.CubeGenerator.Events.ApiEvents.PlaceEvent;
 import org.bukkit.Location;

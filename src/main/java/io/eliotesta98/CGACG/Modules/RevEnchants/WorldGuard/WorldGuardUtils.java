@@ -1,4 +1,4 @@
-package io.eliotesta98.CGACG.Modules.WorldGuard;
+package io.eliotesta98.CGACG.Modules.RevEnchants.WorldGuard;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.math.BlockVector3;
