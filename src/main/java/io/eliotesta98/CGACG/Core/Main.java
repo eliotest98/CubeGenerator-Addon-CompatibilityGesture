@@ -1,14 +1,20 @@
 package io.eliotesta98.CGACG.Core;
 
-import io.eliotesta98.CGACG.Modules.CubeGenerator.DisbandGeneratorEvent;
-import io.eliotesta98.CGACG.Modules.CubeGenerator.PlaceGeneratorEvent;
+import io.eliotesta98.CGACG.Modules.PlotSquared7.CubeGenerator.ClickGeneratorFrameEvent;
+import io.eliotesta98.CGACG.Modules.PlotSquared7.PlotSquaredEvents;
+import io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator.BreakEvent;
+import io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator.DisbandGeneratorEvent;
+import io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator.PlaceGeneratorEvent;
+import io.eliotesta98.CGACG.Modules.RevEnchants.*;
 import io.eliotesta98.CGACG.Utils.*;
 import org.bukkit.plugin.java.*;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,14 +28,13 @@ public class Main extends JavaPlugin {
         long tempo = System.currentTimeMillis();
         Main.instance = this;
 
-        //TODO da cambiare
         getServer().getConsoleSender()
-                .sendMessage("§a     ____    ____      _       ____    ____ \n" +
+                .sendMessage("\n§a   ____    ____      _       ____    ____ \n" +
                         "  / ___|  / ___|    / \\     / ___|  / ___|\n" +
                         " | |     | |  _    / _ \\   | |     | |  _ \n" +
                         " | |___  | |_| |  / ___ \\  | |___  | |_| |\n" +
                         "  \\____|  \\____| /_/   \\_\\  \\____|  \\____|\n"
-                        + "§e© Developed by §feliotesta98 §ewith §4<3 \r\n \r\n \r\n");
+                        + "\n§e© Developed by §feliotesta98 §ewith §4<3 \r\n \r\n");
 
         this.getServer().getConsoleSender().sendMessage("§6Loading config...");
 
@@ -117,8 +122,24 @@ public class Main extends JavaPlugin {
                     }
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with RevEnchants.");
+
+                    if (getConfigGestion().isDropsLikeRevEnchantsMine()) {
+                        Bukkit.getServer().getPluginManager().registerEvents(new DropsLikeRevEnchantsMine(), this);
+                    }
                     Bukkit.getServer().getPluginManager().registerEvents(new PlaceGeneratorEvent(), this);
                     Bukkit.getServer().getPluginManager().registerEvents(new DisbandGeneratorEvent(), this);
+                    Bukkit.getServer().getPluginManager().registerEvents(new JHEvent(), this);
+                    Bukkit.getServer().getPluginManager().registerEvents(new BreakEvent(), this);
+                    Bukkit.getServer().getPluginManager().registerEvents(new OtherEvents(), this);
+                }
+            }
+            if (Bukkit.getServer().getPluginManager().isPluginEnabled("PlotSquared")) {
+                if (getConfigGestion().getHooks().get("PlotSquared7")) {
+                    Bukkit.getServer().getConsoleSender()
+                            .sendMessage("§e[CGACG] §7Added compatibility with PlotSquared7.");
+                    new PlotSquaredEvents();
+                    Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.PlotSquared7.CubeGenerator.PlaceGeneratorEvent(), this);
+                    Bukkit.getServer().getPluginManager().registerEvents(new ClickGeneratorFrameEvent(), this);
                 }
             }
         });

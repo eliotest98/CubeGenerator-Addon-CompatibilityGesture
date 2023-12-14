@@ -2,6 +2,7 @@ package io.eliotesta98.CGACG.Utils;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+
 import java.util.ArrayList;
 
 public class AnglesSearcher {
@@ -9,18 +10,18 @@ public class AnglesSearcher {
     // 0 = angolo min, 1 = angolo max
     public static ArrayList<Location> searchAngle(ArrayList<Location> locations) {
         // Inizializza le coordinate minime e massime con i valori massimi e minimi possibili iniziali
-        double minX = Double.POSITIVE_INFINITY;
-        double minY = Double.POSITIVE_INFINITY;
-        double minZ = Double.POSITIVE_INFINITY;
-        double maxX = Double.NEGATIVE_INFINITY;
-        double maxY = Double.NEGATIVE_INFINITY;
-        double maxZ = Double.NEGATIVE_INFINITY;
+        int minX = Integer.MAX_VALUE;
+        int minY = Integer.MAX_VALUE;
+        int minZ = Integer.MAX_VALUE;
+        int maxX = Integer.MIN_VALUE;
+        int maxY = Integer.MIN_VALUE;
+        int maxZ = Integer.MIN_VALUE;
         World world = locations.get(0).getWorld();
 
         for (Location loc : locations) {
-            double x = loc.getX();
-            double y = loc.getY();
-            double z = loc.getZ();
+            int x = loc.getBlockX();
+            int y = loc.getBlockY();
+            int z = loc.getBlockZ();
 
             minX = Math.min(minX, x);
             minY = Math.min(minY, y);
@@ -32,8 +33,8 @@ public class AnglesSearcher {
         }
 
         ArrayList<Location> angoli = new ArrayList<>();
-        angoli.add(new Location(world, minX, minY, minZ));
-        angoli.add(new Location(world, maxX, maxY, maxZ));
+        angoli.add(new Location(world, minX, minY, minZ).add(1, 1, 1));
+        angoli.add(new Location(world, maxX, maxY, maxZ).subtract(1, 1, 1));
         return angoli;
     }
 }
