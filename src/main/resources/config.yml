@@ -23,6 +23,7 @@ Configuration:
       # if false, the plugin will drop the items like a normal CubeGenerator.
       DropsLikeRevEnchantsMine: false
     PlotSquared7: false
+    ItemsAdder: false
 
 Debug:
   # Enabled time execution

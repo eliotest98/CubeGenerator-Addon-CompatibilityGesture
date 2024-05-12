@@ -1,5 +1,6 @@
 package io.eliotesta98.CGACG.Core;
 
+import io.eliotesta98.CGACG.Modules.ItemsAdder.CubeGenerator.GeneratorEvents;
 import io.eliotesta98.CGACG.Modules.PlotSquared7.CubeGenerator.ClickGeneratorFrameEvent;
 import io.eliotesta98.CGACG.Modules.PlotSquared7.PlotSquaredEvents;
 import io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator.BreakEvent;
@@ -140,6 +141,13 @@ public class Main extends JavaPlugin {
                     new PlotSquaredEvents();
                     Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.PlotSquared7.CubeGenerator.PlaceGeneratorEvent(), this);
                     Bukkit.getServer().getPluginManager().registerEvents(new ClickGeneratorFrameEvent(), this);
+                }
+            }
+            if (Bukkit.getServer().getPluginManager().isPluginEnabled("ItemsAdder")) {
+                if (getConfigGestion().getHooks().get("ItemsAdder")) {
+                    Bukkit.getServer().getConsoleSender()
+                            .sendMessage("§e[CGACG] §7Added compatibility with ItemsAdder.");
+                    Bukkit.getServer().getPluginManager().registerEvents(new GeneratorEvents(),this);
                 }
             }
         });
