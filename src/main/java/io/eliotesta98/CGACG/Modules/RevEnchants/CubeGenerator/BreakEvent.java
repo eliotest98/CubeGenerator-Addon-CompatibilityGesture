@@ -28,10 +28,18 @@ public class BreakEvent implements Listener {
             }
             long unbreakingLevel = RevEnchantUtils.getEnchantLevel(RevEnchantUtils.getRevTool(event.getItemInHand()), "Unbreaking");
             if (unbreakingLevel > 0) {
-                if (RevEnchantUtils.give(RevEnchantUtils.chance("Unbreaking", unbreakingLevel))) {
-                    event.getItemInHand().addUnsafeEnchantment(Enchantment.DURABILITY, (int) unbreakingLevel);
-                } else {
-                    event.getItemInHand().removeEnchantment(Enchantment.DURABILITY);
+                try {
+                    if (RevEnchantUtils.give(RevEnchantUtils.chance("Unbreaking", unbreakingLevel))) {
+                        event.getItemInHand().addUnsafeEnchantment(Enchantment.UNBREAKING, (int) unbreakingLevel);
+                    } else {
+                        event.getItemInHand().removeEnchantment(Enchantment.UNBREAKING);
+                    }
+                } catch (NoSuchFieldError error) {
+                    if (RevEnchantUtils.give(RevEnchantUtils.chance("Unbreaking", unbreakingLevel))) {
+                        event.getItemInHand().addUnsafeEnchantment(Enchantment.getByName("DURABILITY"), (int) unbreakingLevel);
+                    } else {
+                        event.getItemInHand().removeEnchantment(Enchantment.getByName("DURABILITY"));
+                    }
                 }
             }
             if (debug) {
