@@ -1,6 +1,8 @@
 package io.eliotesta98.CGACG.Core;
 
 import io.eliotesta98.CGACG.Modules.ItemsAdder.CubeGenerator.GeneratorEvents;
+import io.eliotesta98.CGACG.Modules.Lands.LandsEvents;
+import io.eliotesta98.CGACG.Modules.Lands.LandsUtils;
 import io.eliotesta98.CGACG.Modules.PlotSquared7.CubeGenerator.ClickGeneratorFrameEvent;
 import io.eliotesta98.CGACG.Modules.PlotSquared7.PlotSquaredEvents;
 import io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator.BreakEvent;
@@ -8,6 +10,7 @@ import io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator.DisbandGeneratorEv
 import io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator.PlaceGeneratorEvent;
 import io.eliotesta98.CGACG.Modules.RevEnchants.*;
 import io.eliotesta98.CGACG.Utils.*;
+import me.angeschossen.lands.api.LandsIntegration;
 import org.bukkit.plugin.java.*;
 
 import java.io.File;
@@ -23,6 +26,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 public class Main extends JavaPlugin {
     public static Main instance;
     public static ConfigGestion config;
+    public static LandsUtils landsUtils;
 
     public void onEnable() {
         DebugUtils debugsistem = new DebugUtils();
@@ -141,6 +145,16 @@ public class Main extends JavaPlugin {
                     new PlotSquaredEvents();
                     Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.PlotSquared7.CubeGenerator.PlaceGeneratorEvent(), this);
                     Bukkit.getServer().getPluginManager().registerEvents(new ClickGeneratorFrameEvent(), this);
+                }
+            }
+            if(Bukkit.getServer().getPluginManager().isPluginEnabled("Lands")) {
+                if (getConfigGestion().getHooks().get("Lands")) {
+                    Bukkit.getServer().getConsoleSender()
+                            .sendMessage("§e[CGACG] §7Added compatibility with Lands.");
+                    Bukkit.getServer().getPluginManager().registerEvents(new LandsEvents(), this);
+                    Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.Lands.CubeGenerator.GeneratorEvents(), this);
+                    landsUtils = new LandsUtils();
+                    landsUtils.setLandsIntegration(this);
                 }
             }
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("ItemsAdder")) {

@@ -7,7 +7,7 @@
 
 Configuration:
 
-  # Set whether various plugins should be hooked into (i will also check if is enabled).
+  # Set whether various plugins should be hooked into (I will also check if is enabled).
   Hooks:
     RevEnchants:
       Enabled: false
@@ -24,6 +24,18 @@ Configuration:
       DropsLikeRevEnchantsMine: false
     PlotSquared7: false
     ItemsAdder: false
+    Lands:
+      Enabled: false
+      # Excluded Lands (names)
+      ExcludedLands:
+        - "Widerness"
+
+# You can use a different coloring by using a hexadecimal for all messages Ex.&{#FFFF00}(yellow).
+# Example for the message: {prefix}&{#FFFF00}You cannot place the CubeGenerator &a&lin this claim!
+Messages:
+  Prefix: '&eCubeGenerator &r'
+  Lands:
+    ChunkClaimed: '{prefix}&cYou cannot place the CubeGenerator in this claim!'
 
 Debug:
   # Enabled time execution
