@@ -18,10 +18,11 @@ import org.bukkit.Location;
 import org.bukkit.World;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WorldGuardUtils {
 
-    private static final ArrayList<String> regionFlags = Main.instance.getConfigGestion().getRegionFlags();
+    private static final List<String> regionFlags = Main.instance.getConfigGestion().getRegionFlags();
     private static final boolean debug = Main.instance.getConfigGestion().getDebug().get("Compatibility");
     private static final DebugUtils debugUtils = new DebugUtils();
 
