@@ -42,4 +42,8 @@ public class ColorUtils {
         }
         return ChatColor.translateAlternateColorCodes('&', message);
     }
+
+    public static String stripColor(String message) {
+        return ChatColor.stripColor(message);
+    }
 }

@@ -12,10 +12,8 @@ import io.eliotesta98.CubeGenerator.api.CubeGeneratorAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+
+import java.util.*;
 
 public class PlotSquaredEvents {
 
@@ -32,7 +30,7 @@ public class PlotSquaredEvents {
         if (!e.wasAdded()) // se uguale a false il player viene tolto dal plot
         {
             Player player = Bukkit.getPlayer(e.getPlayer());
-            ArrayList<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(player.getName());
+            List<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(player.getName());
             if (!playerGenerators.isEmpty()) {
                 for (Integer generatorId : playerGenerators) {
                     CubeGeneratorAPI.disbandGenerator(generatorId, player, player.getName());
@@ -54,7 +52,7 @@ public class PlotSquaredEvents {
         HashSet<UUID> trusted = e.getPlot().getTrusted();
         for (UUID uid : members) {
             OfflinePlayer player = Bukkit.getOfflinePlayer(uid);
-            ArrayList<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(Bukkit.getOfflinePlayer(uid).getName());
+            List<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(Bukkit.getOfflinePlayer(uid).getName());
             if (!playerGenerators.isEmpty()) {
                 for (Integer generatorId : playerGenerators) {
                     CubeGeneratorAPI.disbandGenerator(generatorId, player.getPlayer(), player.getName());
@@ -63,7 +61,7 @@ public class PlotSquaredEvents {
         }
         for (UUID uidowners : owners) {
             OfflinePlayer player = Bukkit.getOfflinePlayer(uidowners);
-            ArrayList<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(Bukkit.getOfflinePlayer(uidowners).getName());
+            List<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(Bukkit.getOfflinePlayer(uidowners).getName());
             if (!playerGenerators.isEmpty()) {
                 for (Integer generatorId : playerGenerators) {
                     CubeGeneratorAPI.disbandGenerator(generatorId, player.getPlayer(), player.getName());
@@ -72,7 +70,7 @@ public class PlotSquaredEvents {
         }
         for (UUID uidtrusted : trusted) {
             OfflinePlayer player = Bukkit.getOfflinePlayer(uidtrusted);
-            ArrayList<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(Bukkit.getOfflinePlayer(uidtrusted).getName());
+            List<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(Bukkit.getOfflinePlayer(uidtrusted).getName());
             if (!playerGenerators.isEmpty()) {
                 for (Integer generatorId : playerGenerators) {
                     CubeGeneratorAPI.disbandGenerator(generatorId, player.getPlayer(), player.getName());
@@ -94,7 +92,7 @@ public class PlotSquaredEvents {
         HashSet<UUID> trusted = e.getPlot().getTrusted();
         for (UUID uid : members) {
             OfflinePlayer player = Bukkit.getOfflinePlayer(uid);
-            ArrayList<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(Bukkit.getOfflinePlayer(uid).getName());
+            List<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(Bukkit.getOfflinePlayer(uid).getName());
             if (!playerGenerators.isEmpty()) {
                 for (Integer generatorId : playerGenerators) {
                     CubeGeneratorAPI.disbandGenerator(generatorId, player.getPlayer(), player.getName());
@@ -103,7 +101,7 @@ public class PlotSquaredEvents {
         }
         for (UUID uidowners : owners) {
             OfflinePlayer player = Bukkit.getOfflinePlayer(uidowners);
-            ArrayList<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(Bukkit.getOfflinePlayer(uidowners).getName());
+            List<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(Bukkit.getOfflinePlayer(uidowners).getName());
             if (!playerGenerators.isEmpty()) {
                 for (Integer generatorId : playerGenerators) {
                     CubeGeneratorAPI.disbandGenerator(generatorId, player.getPlayer(), player.getName());
@@ -112,7 +110,7 @@ public class PlotSquaredEvents {
         }
         for (UUID uidtrusted : trusted) {
             OfflinePlayer player = Bukkit.getOfflinePlayer(uidtrusted);
-            ArrayList<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(Bukkit.getOfflinePlayer(uidtrusted).getName());
+            List<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(Bukkit.getOfflinePlayer(uidtrusted).getName());
             if (!playerGenerators.isEmpty()) {
                 for (Integer generatorId : playerGenerators) {
                     CubeGeneratorAPI.disbandGenerator(generatorId, player.getPlayer(), player.getName());
@@ -132,7 +130,7 @@ public class PlotSquaredEvents {
         // se uguale a false il player viene tolto dal plot
         if (!e.wasAdded()) {
             Player player = Bukkit.getPlayer(e.getPlayer());
-            ArrayList<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(player.getName());
+            List<Integer> playerGenerators = CubeGeneratorAPI.getGeneratorsIdFromPlayer(player.getName());
             if (!playerGenerators.isEmpty()) {
                 for (Integer generatorId : playerGenerators) {
                     CubeGeneratorAPI.disbandGenerator(generatorId, player, player.getName());

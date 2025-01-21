@@ -29,6 +29,7 @@ Configuration:
       # Excluded Lands (names)
       ExcludedLands:
         - "Widerness"
+    AxBoosters: false
 
 # You can use a different coloring by using a hexadecimal for all messages Ex.&{#FFFF00}(yellow).
 # Example for the message: {prefix}&{#FFFF00}You cannot place the CubeGenerator &a&lin this claim!

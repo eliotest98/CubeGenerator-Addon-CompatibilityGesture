@@ -1,5 +1,6 @@
 package io.eliotesta98.CGACG.Core;
 
+import io.eliotesta98.CGACG.Modules.AxBoosters.AxBoosterHook;
 import io.eliotesta98.CGACG.Modules.ItemsAdder.CubeGenerator.GeneratorEvents;
 import io.eliotesta98.CGACG.Modules.Lands.LandsEvents;
 import io.eliotesta98.CGACG.Modules.Lands.LandsUtils;
@@ -10,7 +11,6 @@ import io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator.DisbandGeneratorEv
 import io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator.PlaceGeneratorEvent;
 import io.eliotesta98.CGACG.Modules.RevEnchants.*;
 import io.eliotesta98.CGACG.Utils.*;
-import me.angeschossen.lands.api.LandsIntegration;
 import org.bukkit.plugin.java.*;
 
 import java.io.File;
@@ -35,11 +35,11 @@ public class Main extends JavaPlugin {
 
         getServer().getConsoleSender()
                 .sendMessage("\n§a   ____    ____      _       ____    ____ \n" +
-                        "  / ___|  / ___|    / \\     / ___|  / ___|\n" +
-                        " | |     | |  _    / _ \\   | |     | |  _ \n" +
-                        " | |___  | |_| |  / ___ \\  | |___  | |_| |\n" +
-                        "  \\____|  \\____| /_/   \\_\\  \\____|  \\____|\n"
-                        + "\n§e© Developed by §feliotesta98 §ewith §4<3 \r\n \r\n");
+                        "§a  / ___|  / ___|    / \\     / ___|  / ___|\n" +
+                        "§a | |     | |  _    / _ \\   | |     | |  _ \n" +
+                        "§a | |___  | |_| |  / ___ \\  | |___  | |_| |\n" +
+                        "§a  \\____|  \\____| /_/   \\_\\  \\____|  \\____|\n"
+                        + "\n§e© Developed by §feliotesta98 §e& §fxSavior_of_God §ewith §4<3 \r\n \r\n");
 
         this.getServer().getConsoleSender().sendMessage("§6Loading config...");
 
@@ -162,6 +162,13 @@ public class Main extends JavaPlugin {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with ItemsAdder.");
                     Bukkit.getServer().getPluginManager().registerEvents(new GeneratorEvents(),this);
+                }
+            }
+            if(Bukkit.getServer().getPluginManager().isPluginEnabled("AxBooster")) {
+                if (getConfigGestion().getHooks().get("AxBooster")) {
+                    Bukkit.getServer().getConsoleSender()
+                            .sendMessage("§e[CGACG] §7Added compatibility with AxBooster.");
+                    Bukkit.getServer().getPluginManager().registerEvents(new AxBoosterHook(),this);
                 }
             }
         });
