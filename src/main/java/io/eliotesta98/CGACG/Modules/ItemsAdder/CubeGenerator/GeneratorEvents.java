@@ -33,11 +33,18 @@ public class GeneratorEvents implements Listener {
     public void onBreak(BreakEvent breakEvent) {
         if (ItemsAdderUtils.isCustomBlock(breakEvent.getBlockBreaked())) {
             int id = CubeGeneratorAPI.getGeneratorIdFromLocation(breakEvent.getBlockBreaked().getLocation());
+            String material = ItemsAdderUtils.getNamespaceIdFromBlock(breakEvent.getBlockBreaked());
             breakEvent.setCancelled(true);
-            // Added items at inventory
-            for (ItemStack itemStack : ItemsAdderUtils.getItems(breakEvent.getBlockBreaked(), breakEvent.getItemInHand())) {
-                CubeGeneratorAPI.addBlockToInventory(breakEvent.getBreaker(), breakEvent.getBlockBreaked(), itemStack, id);
+
+            // Check if is a lucky block
+            boolean rewarded = CubeGeneratorAPI.luckyBlockBreak(id, breakEvent.getBreaker(), material);
+            if (!rewarded) {
+                // Added items at inventory
+                for (ItemStack itemStack : ItemsAdderUtils.getItems(breakEvent.getBlockBreaked(), breakEvent.getItemInHand())) {
+                    CubeGeneratorAPI.addBlockToInventory(breakEvent.getBreaker(), breakEvent.getBlockBreaked(), itemStack, id);
+                }
             }
+
             ItemsAdderUtils.removeBlock(breakEvent.getBlockBreaked());
             // Set the block
             CubeGeneratorAPI.setRandomGeneratorBlock(id, breakEvent.getBlockBreaked().getLocation(), false, -1L, true, false);

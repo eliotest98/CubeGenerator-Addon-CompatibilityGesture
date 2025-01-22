@@ -66,7 +66,10 @@ public class ItemsAdderUtils {
         return customBlock != null;
     }
 
-
+    public static String getNamespaceIdFromBlock(Block block) {
+        CustomBlock customBlock = CustomBlock.byAlreadyPlaced(block);
+        return "ITEMSADDER-" + customBlock.getNamespacedID().replace(":", "-").toUpperCase();
+    }
 
     public static List<ItemStack> getItems(Block block, ItemStack itemInHand) {
         CustomBlock customBlock = CustomBlock.byAlreadyPlaced(block);
