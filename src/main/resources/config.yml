@@ -30,6 +30,8 @@ Configuration:
       ExcludedLands:
         - "Widerness"
     AxBoosters: false
+    WildTools: false
+    AdvancedEnchantments: false
 
 # You can use a different coloring by using a hexadecimal for all messages Ex.&{#FFFF00}(yellow).
 # Example for the message: {prefix}&{#FFFF00}You cannot place the CubeGenerator &a&lin this claim!

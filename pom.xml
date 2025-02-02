@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>CGACG</groupId>
 	<artifactId>CGACG</artifactId>
-	<version>1.3</version>
+	<version>1.3.2</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -127,6 +127,11 @@
 			<id>Artillex-Studios</id>
 			<url>https://repo.artillex-studios.com/releases/</url>
 		</repository>
+		<!-- WildTools -->
+		<repository>
+			<id>bg-repo</id>
+			<url>https://repo.bg-software.com/repository/api/</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<!-- Spigot -->
@@ -195,6 +200,13 @@
 			<groupId>com.artillexstudios</groupId>
 			<artifactId>AxBoostersAPI</artifactId>
 			<version>5</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- WildTools -->
+		<dependency>
+			<groupId>com.bgsoftware</groupId>
+			<artifactId>WildToolsAPI</artifactId>
+			<version>2024.4</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

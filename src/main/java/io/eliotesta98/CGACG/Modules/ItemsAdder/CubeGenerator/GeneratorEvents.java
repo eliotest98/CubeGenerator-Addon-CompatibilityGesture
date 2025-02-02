@@ -1,5 +1,6 @@
 package io.eliotesta98.CGACG.Modules.ItemsAdder.CubeGenerator;
 
+import dev.lone.itemsadder.api.CustomStack;
 import io.eliotesta98.CGACG.Modules.ItemsAdder.ItemsAdderUtils;
 import io.eliotesta98.CubeGenerator.Events.ApiEvents.PlaceGeneratorBlockEvent;
 import io.eliotesta98.CubeGenerator.Events.ApiEvents.RemoveGeneratorBlockEvent;
@@ -15,16 +16,21 @@ public class GeneratorEvents implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlace(PlaceGeneratorBlockEvent event) {
-        if (event.getType().equalsIgnoreCase("Internal") && event.getMaterial().contains("-")) {
-            String[] split = event.getMaterial().toLowerCase().split("-");
-            if (split.length != 3) {
-                return;
+        if (event.getType().equalsIgnoreCase("Internal")) {
+            if (ItemsAdderUtils.isCustomBlock(event.getBlockPlaced())) {
+                ItemsAdderUtils.removeBlock(event.getBlockPlaced(), false);
             }
-            String nameSpace = split[1];
-            String material = split[2];
-            if (ItemsAdderUtils.isMaterialCustom(nameSpace + ":" + material)) {
-                event.setCancelled(true);
-                ItemsAdderUtils.placeBlock(nameSpace + ":" + material, event.getBlockPlaced().getLocation());
+            if (event.getMaterial().contains("-")) {
+                String[] split = event.getMaterial().toLowerCase().split("-");
+                if (split.length != 3) {
+                    return;
+                }
+                String nameSpace = split[1];
+                String material = split[2];
+                if (ItemsAdderUtils.isMaterialCustom(nameSpace + ":" + material)) {
+                    event.setCancelled(true);
+                    ItemsAdderUtils.placeBlock(nameSpace + ":" + material, event.getBlockPlaced().getLocation());
+                }
             }
         }
     }
@@ -33,12 +39,19 @@ public class GeneratorEvents implements Listener {
     public void onBreak(BreakEvent breakEvent) {
         if (ItemsAdderUtils.isCustomBlock(breakEvent.getBlockBreaked())) {
             int id = CubeGeneratorAPI.getGeneratorIdFromLocation(breakEvent.getBlockBreaked().getLocation());
+            String material = ItemsAdderUtils.getNamespaceIdFromBlock(breakEvent.getBlockBreaked());
             breakEvent.setCancelled(true);
-            // Added items at inventory
-            for (ItemStack itemStack : ItemsAdderUtils.getItems(breakEvent.getBlockBreaked(), breakEvent.getItemInHand())) {
-                CubeGeneratorAPI.addBlockToInventory(breakEvent.getBreaker(), breakEvent.getBlockBreaked(), itemStack, id);
+
+            // Check if is a lucky block
+            boolean rewarded = CubeGeneratorAPI.luckyBlockBreak(id, breakEvent.getBreaker(), material);
+            if (!rewarded) {
+                // Added items at inventory
+                for (ItemStack itemStack : ItemsAdderUtils.getItems(breakEvent.getBlockBreaked(), breakEvent.getItemInHand())) {
+                    CubeGeneratorAPI.addBlockToInventory(breakEvent.getBreaker(), breakEvent.getBlockBreaked(), itemStack, id);
+                }
             }
-            ItemsAdderUtils.removeBlock(breakEvent.getBlockBreaked());
+
+            ItemsAdderUtils.removeBlock(breakEvent.getBlockBreaked(), true);
             // Set the block
             CubeGeneratorAPI.setRandomGeneratorBlock(id, breakEvent.getBlockBreaked().getLocation(), false, -1L, true, false);
         }
@@ -57,7 +70,7 @@ public class GeneratorEvents implements Listener {
     public void onBlockDelete(RemoveGeneratorBlockEvent event) {
         if (ItemsAdderUtils.isCustomBlock(event.getBlockRemoved())) {
             event.setCancelled(true);
-            ItemsAdderUtils.removeBlock(event.getBlockRemoved());
+            ItemsAdderUtils.removeBlock(event.getBlockRemoved(), true);
         }
     }
 

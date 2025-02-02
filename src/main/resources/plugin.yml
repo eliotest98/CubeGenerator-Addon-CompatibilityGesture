@@ -3,7 +3,7 @@ version: maven-version-number
 main: io.eliotesta98.CGACG.Core.Main
 api-version: 1.13
 authors: [ eliotesta98, xSavior_of_God ]
-softdepend: [ RevEnchants, PlotSquared, ItemsAdder, Lands, AxBoosters ]
+softdepend: [ RevEnchants, PlotSquared, ItemsAdder, Lands, AxBoosters, WildTools, AdvancedEnchantments ]
 depend: [ CubeGenerator ]
 commands: { }
 permissions: { }

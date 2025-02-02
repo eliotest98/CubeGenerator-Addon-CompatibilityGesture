@@ -17,11 +17,13 @@ public class ItemsAdderUtils {
         customBlock.place(location);
     }
 
-    public static boolean removeBlock(Block block) {
+    public static boolean removeBlock(Block block, boolean playAll) {
         CustomBlock customBlock = CustomBlock.byAlreadyPlaced(block);
-        customBlock.playBreakParticles();
-        customBlock.playBreakEffect();
-        customBlock.playBreakSound();
+        if(playAll) {
+            customBlock.playBreakParticles();
+            customBlock.playBreakEffect();
+            customBlock.playBreakSound();
+        }
         return customBlock.remove();
     }
 
@@ -66,7 +68,10 @@ public class ItemsAdderUtils {
         return customBlock != null;
     }
 
-
+    public static String getNamespaceIdFromBlock(Block block) {
+        CustomBlock customBlock = CustomBlock.byAlreadyPlaced(block);
+        return "ITEMSADDER-" + customBlock.getNamespacedID().replace(":", "-").toUpperCase();
+    }
 
     public static List<ItemStack> getItems(Block block, ItemStack itemInHand) {
         CustomBlock customBlock = CustomBlock.byAlreadyPlaced(block);
