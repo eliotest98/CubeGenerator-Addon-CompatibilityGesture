@@ -1,7 +1,6 @@
 package io.eliotesta98.CGACG.Core;
 
 import io.eliotesta98.CGACG.Modules.AxBoosters.AxBoosterHook;
-import io.eliotesta98.CGACG.Modules.ItemsAdder.CubeGenerator.GeneratorEvents;
 import io.eliotesta98.CGACG.Modules.Lands.LandsEvents;
 import io.eliotesta98.CGACG.Modules.Lands.LandsUtils;
 import io.eliotesta98.CGACG.Modules.PlotSquared7.CubeGenerator.ClickGeneratorFrameEvent;
@@ -12,13 +11,11 @@ import io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator.PlaceGeneratorEven
 import io.eliotesta98.CGACG.Modules.RevEnchants.*;
 import io.eliotesta98.CGACG.Utils.*;
 import org.bukkit.plugin.java.*;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -147,7 +144,7 @@ public class Main extends JavaPlugin {
                     Bukkit.getServer().getPluginManager().registerEvents(new ClickGeneratorFrameEvent(), this);
                 }
             }
-            if(Bukkit.getServer().getPluginManager().isPluginEnabled("Lands")) {
+            if (Bukkit.getServer().getPluginManager().isPluginEnabled("Lands")) {
                 if (getConfigGestion().getHooks().get("Lands")) {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with Lands.");
@@ -161,14 +158,30 @@ public class Main extends JavaPlugin {
                 if (getConfigGestion().getHooks().get("ItemsAdder")) {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with ItemsAdder.");
-                    Bukkit.getServer().getPluginManager().registerEvents(new GeneratorEvents(),this);
+                    Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.ItemsAdder.CubeGenerator.GeneratorEvents(), this);
                 }
             }
-            if(Bukkit.getServer().getPluginManager().isPluginEnabled("AxBooster")) {
+            if (Bukkit.getServer().getPluginManager().isPluginEnabled("AxBooster")) {
                 if (getConfigGestion().getHooks().get("AxBooster")) {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with AxBooster.");
-                    Bukkit.getServer().getPluginManager().registerEvents(new AxBoosterHook(),this);
+                    Bukkit.getServer().getPluginManager().registerEvents(new AxBoosterHook(), this);
+                }
+            }
+
+            if (Bukkit.getServer().getPluginManager().isPluginEnabled("WildTools")) {
+                if (getConfigGestion().getHooks().get("WildTools")) {
+                    Bukkit.getServer().getConsoleSender()
+                            .sendMessage("§e[CGACG] §7Added compatibility with WildTools.");
+                    Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.WildTools.GeneratorEvents(), this);
+                }
+            }
+
+            if(Bukkit.getServer().getPluginManager().isPluginEnabled("AdvancedEnchantments")) {
+                if (getConfigGestion().getHooks().get("AdvancedEnchantments")) {
+                    Bukkit.getServer().getConsoleSender()
+                            .sendMessage("§e[CGACG] §7Added compatibility with AdvancedEnchantments.");
+                    Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.AdvancedEnchantments.GeneratorEvents(), this);
                 }
             }
         });

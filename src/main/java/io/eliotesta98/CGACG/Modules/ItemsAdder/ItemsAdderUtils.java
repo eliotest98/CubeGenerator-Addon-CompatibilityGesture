@@ -17,11 +17,13 @@ public class ItemsAdderUtils {
         customBlock.place(location);
     }
 
-    public static boolean removeBlock(Block block) {
+    public static boolean removeBlock(Block block, boolean playAll) {
         CustomBlock customBlock = CustomBlock.byAlreadyPlaced(block);
-        customBlock.playBreakParticles();
-        customBlock.playBreakEffect();
-        customBlock.playBreakSound();
+        if(playAll) {
+            customBlock.playBreakParticles();
+            customBlock.playBreakEffect();
+            customBlock.playBreakSound();
+        }
         return customBlock.remove();
     }
 
