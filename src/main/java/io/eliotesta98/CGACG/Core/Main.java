@@ -16,6 +16,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -26,7 +28,7 @@ public class Main extends JavaPlugin {
     public static LandsUtils landsUtils;
 
     public void onEnable() {
-        DebugUtils debugsistem = new DebugUtils();
+        DebugUtils debugUtils = new DebugUtils();
         long tempo = System.currentTimeMillis();
         Main.instance = this;
 
@@ -61,14 +63,18 @@ public class Main extends JavaPlugin {
                 }
 
             } catch (IOException e) {
-                ColorUtils.sendMessage(Bukkit.getConsoleSender(), e.getMessage());
                 Bukkit.getServer().getLogger().severe(ChatColor.RED + "Could not create config.yml!");
+                if (getConfigGestion().getDebug().get("Enabled")) {
+                    getLogger().log(Level.SEVERE, "Error creating config.yml", e);
+                }
             } finally {
                 if (inputStream != null) {
                     try {
                         inputStream.close();
                     } catch (IOException e) {
-                        ColorUtils.sendMessage(Bukkit.getConsoleSender(), e.getMessage());
+                        if (getConfigGestion().getDebug().get("Enabled")) {
+                            getLogger().log(Level.SEVERE, "Error creating config.yml", e);
+                        }
                     }
                 }
                 if (outputStream != null) {
@@ -76,7 +82,9 @@ public class Main extends JavaPlugin {
                         // outputStream.flush();
                         outputStream.close();
                     } catch (IOException e) {
-                        ColorUtils.sendMessage(Bukkit.getConsoleSender(), e.getMessage());
+                        if (getConfigGestion().getDebug().get("Enabled")) {
+                            getLogger().log(Level.SEVERE, "Error creating config.yml", e);
+                        }
                     }
                 }
             }
@@ -93,12 +101,13 @@ public class Main extends JavaPlugin {
             String[] strings = splits.split(":");
             cfg.syncWithConfig(configFile, this.getResource(configname), strings);
         } catch (IOException e) {
-            ColorUtils.sendMessage(Bukkit.getConsoleSender(), e.getMessage());
+            if (getConfigGestion().getDebug().get("Enabled")) {
+                getLogger().log(Level.SEVERE, "Error synchronizing config.yml", e);
+            }
         }
         config = new ConfigGestion(YamlConfiguration.loadConfiguration(configFile));
         getServer().getConsoleSender().sendMessage("§aConfiguration Loaded!");
         /*Bukkit.getScheduler().runTaskAsynchronously(instance, () -> {
-            loadLabyrinths();
             new UpdateChecker(instance, 103080).getVersion(version1 -> {
                 if (!instance.getDescription().getVersion().equals(version1)) {
                     getServer().getConsoleSender().sendMessage(ChatColor.RED + "New Update available for the Labyrinth Plugin!");
@@ -109,6 +118,9 @@ public class Main extends JavaPlugin {
         // RUNNABLE PER CARICARE LE DIPENDENZE ALLA FINE DELL'AVVIO DEL SERVER :D
         getServer().getScheduler().scheduleSyncDelayedTask(this, () -> {
             if (!Bukkit.getServer().getPluginManager().isPluginEnabled("CubeGenerator")) {
+                if (config.getDebug().get("Enabled")) {
+                    debugUtils.addLine("Missing required dependency: CubeGenerator");
+                }
                 Bukkit.getServer().getConsoleSender()
                         .sendMessage("§e[CGACG] §cCubeGenerator is not present in your server folder, please install it.");
                 onDisable();
@@ -186,18 +198,18 @@ public class Main extends JavaPlugin {
         });
 
         if (config.getDebug().get("Enabled")) {
-            debugsistem.addLine("Enabled execution time= " + (System.currentTimeMillis() - tempo));
-            debugsistem.debug("Enabled");
+            debugUtils.addLine("Enabled execution time= " + (System.currentTimeMillis() - tempo));
+            debugUtils.debug("Enabled");
         }
     }
 
     public void onDisable() {
-        DebugUtils debugsistem = new DebugUtils();
+        DebugUtils debugUtils = new DebugUtils();
         long tempo = System.currentTimeMillis();
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "CGACG has been disabled, §cBye bye! §e:(");
         if (config.getDebug().get("Disabled")) {
-            debugsistem.addLine("Disabled execution time= " + (System.currentTimeMillis() - tempo));
-            debugsistem.debug("Disabled");
+            debugUtils.addLine("Disabled execution time= " + (System.currentTimeMillis() - tempo));
+            debugUtils.debug("Disabled");
         }
     }
 
