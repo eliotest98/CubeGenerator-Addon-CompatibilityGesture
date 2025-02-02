@@ -61,14 +61,14 @@ public class Main extends JavaPlugin {
                 }
 
             } catch (IOException e) {
-                e.printStackTrace();
+                ColorUtils.sendMessage(Bukkit.getConsoleSender(), e.getMessage());
                 Bukkit.getServer().getLogger().severe(ChatColor.RED + "Could not create config.yml!");
             } finally {
                 if (inputStream != null) {
                     try {
                         inputStream.close();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        ColorUtils.sendMessage(Bukkit.getConsoleSender(), e.getMessage());
                     }
                 }
                 if (outputStream != null) {
@@ -76,9 +76,8 @@ public class Main extends JavaPlugin {
                         // outputStream.flush();
                         outputStream.close();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        ColorUtils.sendMessage(Bukkit.getConsoleSender(), e.getMessage());
                     }
-
                 }
             }
         }
@@ -94,7 +93,7 @@ public class Main extends JavaPlugin {
             String[] strings = splits.split(":");
             cfg.syncWithConfig(configFile, this.getResource(configname), strings);
         } catch (IOException e) {
-            e.printStackTrace();
+            ColorUtils.sendMessage(Bukkit.getConsoleSender(), e.getMessage());
         }
         config = new ConfigGestion(YamlConfiguration.loadConfiguration(configFile));
         getServer().getConsoleSender().sendMessage("§aConfiguration Loaded!");
@@ -177,7 +176,7 @@ public class Main extends JavaPlugin {
                 }
             }
 
-            if(Bukkit.getServer().getPluginManager().isPluginEnabled("AdvancedEnchantments")) {
+            if (Bukkit.getServer().getPluginManager().isPluginEnabled("AdvancedEnchantments")) {
                 if (getConfigGestion().getHooks().get("AdvancedEnchantments")) {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with AdvancedEnchantments.");
