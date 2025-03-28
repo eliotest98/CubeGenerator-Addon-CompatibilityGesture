@@ -5,10 +5,7 @@ import com.plotsquared.core.plot.Plot;
 import org.bukkit.Bukkit;
 import com.plotsquared.core.location.Location;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class PlotSquaredUtils {
 
@@ -38,7 +35,7 @@ public class PlotSquaredUtils {
                 checkLocation.getBlockY(), checkLocation.getBlockZ()).getPlot();
     }
 
-    public static boolean checkIfGeneratorIsPartiallyInPlot(ArrayList<org.bukkit.Location> locations) {
+    public static boolean checkIfGeneratorIsPartiallyInPlot(List<org.bukkit.Location> locations) {
         for (org.bukkit.Location location : locations) {
             if(!checkIfBlockIsOnRoadPlot(location)) {
                 return true;

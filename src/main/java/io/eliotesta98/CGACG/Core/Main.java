@@ -26,9 +26,9 @@ public class Main extends JavaPlugin {
     public static Main instance;
     public static ConfigGestion config;
     public static LandsUtils landsUtils;
+    private DebugUtils debugUtils = new DebugUtils();
 
     public void onEnable() {
-        DebugUtils debugUtils = new DebugUtils();
         long tempo = System.currentTimeMillis();
         Main.instance = this;
 
@@ -61,20 +61,14 @@ public class Main extends JavaPlugin {
                 while ((read = inputStream.read(bytes)) != -1) {
                     outputStream.write(bytes, 0, read);
                 }
-
             } catch (IOException e) {
                 Bukkit.getServer().getLogger().severe(ChatColor.RED + "Could not create config.yml!");
-                if (getConfigGestion().getDebug().get("Enabled")) {
-                    getLogger().log(Level.SEVERE, "Error creating config.yml", e);
-                }
             } finally {
                 if (inputStream != null) {
                     try {
                         inputStream.close();
                     } catch (IOException e) {
-                        if (getConfigGestion().getDebug().get("Enabled")) {
-                            getLogger().log(Level.SEVERE, "Error creating config.yml", e);
-                        }
+                        Bukkit.getServer().getLogger().severe(ChatColor.RED + "Could not create config.yml!");
                     }
                 }
                 if (outputStream != null) {
@@ -82,9 +76,7 @@ public class Main extends JavaPlugin {
                         // outputStream.flush();
                         outputStream.close();
                     } catch (IOException e) {
-                        if (getConfigGestion().getDebug().get("Enabled")) {
-                            getLogger().log(Level.SEVERE, "Error creating config.yml", e);
-                        }
+                        Bukkit.getServer().getLogger().severe(ChatColor.RED + "Could not create config.yml!");
                     }
                 }
             }
@@ -101,9 +93,7 @@ public class Main extends JavaPlugin {
             String[] strings = splits.split(":");
             cfg.syncWithConfig(configFile, this.getResource(configname), strings);
         } catch (IOException e) {
-            if (getConfigGestion().getDebug().get("Enabled")) {
-                getLogger().log(Level.SEVERE, "Error synchronizing config.yml", e);
-            }
+            Bukkit.getServer().getLogger().severe(ChatColor.RED + "Error synchronizing config.yml");
         }
         config = new ConfigGestion(YamlConfiguration.loadConfiguration(configFile));
         getServer().getConsoleSender().sendMessage("§aConfiguration Loaded!");
@@ -126,7 +116,7 @@ public class Main extends JavaPlugin {
                 onDisable();
             }
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("RevEnchants")) {
-                if (getConfigGestion().getHooks().get("RevEnchants")) {
+                if (config.getHooks().get("RevEnchants")) {
                     if (!Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
                         Bukkit.getServer().getConsoleSender()
                                 .sendMessage("§e[CGACG] §cWorldGuard is not present in your server folder, please install it.");
@@ -136,7 +126,7 @@ public class Main extends JavaPlugin {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with RevEnchants.");
 
-                    if (getConfigGestion().isDropsLikeRevEnchantsMine()) {
+                    if (config.isDropsLikeRevEnchantsMine()) {
                         Bukkit.getServer().getPluginManager().registerEvents(new DropsLikeRevEnchantsMine(), this);
                     }
                     Bukkit.getServer().getPluginManager().registerEvents(new PlaceGeneratorEvent(), this);
@@ -147,7 +137,7 @@ public class Main extends JavaPlugin {
                 }
             }
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("PlotSquared")) {
-                if (getConfigGestion().getHooks().get("PlotSquared7")) {
+                if (config.getHooks().get("PlotSquared7")) {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with PlotSquared7.");
                     new PlotSquaredEvents();
@@ -156,7 +146,7 @@ public class Main extends JavaPlugin {
                 }
             }
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("Lands")) {
-                if (getConfigGestion().getHooks().get("Lands")) {
+                if (config.getHooks().get("Lands")) {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with Lands.");
                     Bukkit.getServer().getPluginManager().registerEvents(new LandsEvents(), this);
@@ -166,14 +156,14 @@ public class Main extends JavaPlugin {
                 }
             }
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("ItemsAdder")) {
-                if (getConfigGestion().getHooks().get("ItemsAdder")) {
+                if (config.getHooks().get("ItemsAdder")) {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with ItemsAdder.");
                     Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.ItemsAdder.CubeGenerator.GeneratorEvents(), this);
                 }
             }
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("AxBooster")) {
-                if (getConfigGestion().getHooks().get("AxBooster")) {
+                if (config.getHooks().get("AxBooster")) {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with AxBooster.");
                     Bukkit.getServer().getPluginManager().registerEvents(new AxBoosterHook(), this);
@@ -181,7 +171,7 @@ public class Main extends JavaPlugin {
             }
 
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("WildTools")) {
-                if (getConfigGestion().getHooks().get("WildTools")) {
+                if (config.getHooks().get("WildTools")) {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with WildTools.");
                     Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.WildTools.GeneratorEvents(), this);
@@ -189,7 +179,7 @@ public class Main extends JavaPlugin {
             }
 
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("AdvancedEnchantments")) {
-                if (getConfigGestion().getHooks().get("AdvancedEnchantments")) {
+                if (config.getHooks().get("AdvancedEnchantments")) {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with AdvancedEnchantments.");
                     Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.AdvancedEnchantments.GeneratorEvents(), this);
@@ -204,7 +194,6 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
-        DebugUtils debugUtils = new DebugUtils();
         long tempo = System.currentTimeMillis();
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "CGACG has been disabled, §cBye bye! §e:(");
         if (config.getDebug().get("Disabled")) {
