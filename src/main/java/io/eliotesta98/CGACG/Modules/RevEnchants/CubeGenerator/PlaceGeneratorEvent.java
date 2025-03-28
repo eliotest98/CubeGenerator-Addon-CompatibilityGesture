@@ -9,12 +9,13 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlaceGeneratorEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlaceGenerator(PlaceEvent event) {
-        ArrayList<Location> angles = AnglesSearcher.searchAngle(event.getInternalLocations());
+        List<Location> angles = AnglesSearcher.searchAngle(event.getInternalLocations());
         WorldGuardUtils.createRegion(
                 event.getPlacer().getWorld(),
                 "Cube_" + event.getGeneratorId(),

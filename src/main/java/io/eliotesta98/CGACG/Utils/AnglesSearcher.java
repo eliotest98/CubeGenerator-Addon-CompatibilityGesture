@@ -4,11 +4,12 @@ import org.bukkit.Location;
 import org.bukkit.World;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AnglesSearcher {
 
     // 0 = angolo min, 1 = angolo max
-    public static ArrayList<Location> searchAngle(ArrayList<Location> locations) {
+    public static List<Location> searchAngle(List<Location> locations) {
         // Inizializza le coordinate minime e massime con i valori massimi e minimi possibili iniziali
         int minX = Integer.MAX_VALUE;
         int minY = Integer.MAX_VALUE;

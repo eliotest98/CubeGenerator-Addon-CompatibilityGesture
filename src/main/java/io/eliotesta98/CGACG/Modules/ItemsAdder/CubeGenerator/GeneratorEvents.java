@@ -1,6 +1,5 @@
 package io.eliotesta98.CGACG.Modules.ItemsAdder.CubeGenerator;
 
-import dev.lone.itemsadder.api.CustomStack;
 import io.eliotesta98.CGACG.Modules.ItemsAdder.ItemsAdderUtils;
 import io.eliotesta98.CubeGenerator.Events.ApiEvents.PlaceGeneratorBlockEvent;
 import io.eliotesta98.CubeGenerator.Events.ApiEvents.RemoveGeneratorBlockEvent;
@@ -35,7 +34,7 @@ public class GeneratorEvents implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onBreak(BreakEvent breakEvent) {
         if (ItemsAdderUtils.isCustomBlock(breakEvent.getBlockBreaked())) {
             int id = CubeGeneratorAPI.getGeneratorIdFromLocation(breakEvent.getBlockBreaked().getLocation());
