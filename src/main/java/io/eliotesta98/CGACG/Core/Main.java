@@ -16,7 +16,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -182,6 +181,14 @@ public class Main extends JavaPlugin {
                 if (config.getHooks().get("AdvancedEnchantments")) {
                     Bukkit.getServer().getConsoleSender()
                             .sendMessage("§e[CGACG] §7Added compatibility with AdvancedEnchantments.");
+                    Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.AdvancedEnchantments.GeneratorEvents(), this);
+                }
+            }
+
+            if (Bukkit.getServer().getPluginManager().isPluginEnabled("McMMO")) {
+                if (config.getHooks().get("McMMO")) {
+                    Bukkit.getServer().getConsoleSender()
+                            .sendMessage("§e[CGACG] §7Added compatibility with McMMO.");
                     Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.AdvancedEnchantments.GeneratorEvents(), this);
                 }
             }
