@@ -17,6 +17,7 @@ public class ConfigGestion {
     private final List<String> excludedLands = new ArrayList<>();
     private boolean dropsLikeRevEnchantsMine;
     private final String prefix;
+    private boolean giveExperience;
 
     public ConfigGestion(FileConfiguration file) {
 
@@ -32,6 +33,9 @@ public class ConfigGestion {
             } else if (hook.equalsIgnoreCase("Lands")) {
                 hooks.put(hook, file.getBoolean("Configuration.Hooks." + hook + ".Enabled"));
                 excludedLands.addAll(file.getStringList("Configuration.Hooks." + hook + ".ExcludedLands"));
+            } else if (hook.equalsIgnoreCase("McMMO")) {
+                hooks.put(hook, file.getBoolean("Configuration.Hooks." + hook + ".Enabled"));
+                giveExperience = file.getBoolean("Configuration.Hooks." + hook + ".GiveExperience");
             } else {
                 hooks.put(hook, file.getBoolean("Configuration.Hooks." + hook));
             }
@@ -81,6 +85,10 @@ public class ConfigGestion {
             }
         }
         return messagesFinal;
+    }
+
+    public boolean isGiveExperience() {
+        return this.giveExperience;
     }
 
     @Override

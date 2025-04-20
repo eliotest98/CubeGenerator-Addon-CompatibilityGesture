@@ -16,6 +16,6 @@ public class GeneratorEvents implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onBlockBreakMinecraftEvent(BlockBreakEvent event) {
-        CubeGeneratorAPI.doBlockBreak(event.getBlock(), event.getPlayer().getItemInHand(), event.getPlayer());
+        CubeGeneratorAPI.doBlockBreak(event.getBlock(), event.getPlayer().getItemInHand(), event.getPlayer(), event.getExpToDrop());
     }
 }

@@ -17,7 +17,7 @@ public class GeneratorEvents implements Listener {
         for (Location location : event.getBlocks()) {
             String generatorBlockType = CubeGeneratorAPI.isAGeneratorBlock(location.getBlock());
             if (generatorBlockType.equalsIgnoreCase("GENERATOR_BLOCK")) {
-                boolean executed = CubeGeneratorAPI.doBlockBreak(location.getBlock(), event.getTool().getItemStack(), event.getPlayer());
+                boolean executed = CubeGeneratorAPI.doBlockBreak(location.getBlock(), event.getTool().getItemStack(), event.getPlayer(),0);
                 if (!executed) {
                     io.eliotesta98.CubeGenerator.Events.ApiEvents.BreakEvent breakEvent = new BreakEvent(event.getPlayer(), location.getBlock(), location.getBlock().getType().toString(), event.getTool().getItemStack());
                     Bukkit.getPluginManager().callEvent(breakEvent);
