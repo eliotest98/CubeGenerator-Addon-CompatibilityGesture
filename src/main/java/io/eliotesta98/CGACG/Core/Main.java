@@ -11,6 +11,7 @@ import io.eliotesta98.CGACG.Modules.RevEnchants.CubeGenerator.PlaceGeneratorEven
 import io.eliotesta98.CGACG.Modules.RevEnchants.*;
 import io.eliotesta98.CGACG.Utils.*;
 import org.bukkit.plugin.java.*;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -191,6 +192,14 @@ public class Main extends JavaPlugin {
                             .sendMessage("§e[CGACG] §7Added compatibility with McMMO.");
                     Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.AdvancedEnchantments.GeneratorEvents(), this);
                 }
+            }
+            if (Bukkit.getServer().getPluginManager().isPluginEnabled("HeroxLuckyBlock")) {
+                config.getHooks().putIfAbsent("HeroxLuckyBlock", true);
+                Bukkit.getServer().getConsoleSender()
+                        .sendMessage("§e[CGACG] §7Added compatibility with HeroxLuckyBlock.");
+                Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.HeroxLuckyBlock.HeroxLuckyBlockEvents(), this);
+            } else {
+                config.getHooks().putIfAbsent("HeroxLuckyBlock", false);
             }
         });
 
