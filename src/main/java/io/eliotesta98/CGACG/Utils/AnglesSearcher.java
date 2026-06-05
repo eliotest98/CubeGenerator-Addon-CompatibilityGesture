@@ -34,8 +34,8 @@ public class AnglesSearcher {
         }
 
         ArrayList<Location> angoli = new ArrayList<>();
-        angoli.add(new Location(world, minX, minY, minZ).add(1, 1, 1));
-        angoli.add(new Location(world, maxX, maxY, maxZ).subtract(1, 1, 1));
+        angoli.add(new Location(world, minX, minY, minZ));
+        angoli.add(new Location(world, maxX, maxY, maxZ));
         return angoli;
     }
 }

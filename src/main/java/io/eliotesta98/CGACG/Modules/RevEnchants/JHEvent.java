@@ -6,6 +6,7 @@ import io.eliotesta98.CubeGenerator.api.CubeGeneratorAPI;
 import me.revils.revenchants.events.JackHammerEvent;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -34,6 +35,9 @@ public class JHEvent implements Listener {
             debugUtils.addLine("Point 2:" + event.getPoint2());
         }
         if (event.getPoint1().getBlockY() != event.getPoint2().getBlockY()) {
+            if (debug) {
+                debugUtils.debug("RevEnchants Break");
+            }
             throw new Exception("The two points must be on the same Y level");
         }
 
@@ -58,6 +62,7 @@ public class JHEvent implements Listener {
                     if (debug) {
                         debugUtils.addLine("");
                         debugUtils.addLine("The block mined is an internal block of a generator");
+                        debugUtils.debug("RevEnchants Break");
                     }
                     Location one = event.getPoint1();
                     Location two = event.getPoint2();
@@ -69,7 +74,10 @@ public class JHEvent implements Listener {
                     int maxZ = Math.max(one.getBlockZ(), two.getBlockZ());
                     for (int x = minX; x <= maxX; x++) {
                         for (int z = minZ; z <= maxZ; z++) {
-                            CubeGeneratorAPI.doBlockBreak(one.getWorld().getBlockAt(x, y, z), itemInHand, event.getPlayer().getName());
+                            Block block1 = one.getWorld().getBlockAt(x, y, z);
+                            if(!openLuckyBlock(block1, event.getPlayer())) {
+                                CubeGeneratorAPI.doBlockBreak(block1, itemInHand, event.getPlayer().getName());
+                            }
                         }
                     }
                     event.setCancelled(true);
@@ -86,6 +94,13 @@ public class JHEvent implements Listener {
                     break;
             }
         }
+    }
+
+    public boolean openLuckyBlock(Block block, Player player) {
+        if (Main.luckyBlockUtils != null) {
+            return Main.luckyBlockUtils.openLuckyBlock(block, player);
+        }
+        return false;
     }
 
 }

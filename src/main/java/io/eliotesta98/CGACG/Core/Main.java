@@ -1,6 +1,7 @@
 package io.eliotesta98.CGACG.Core;
 
 import io.eliotesta98.CGACG.Modules.AxBoosters.AxBoosterHook;
+import io.eliotesta98.CGACG.Modules.HeroxLuckyBlock.LuckyBlockUtils;
 import io.eliotesta98.CGACG.Modules.Lands.LandsEvents;
 import io.eliotesta98.CGACG.Modules.Lands.LandsUtils;
 import io.eliotesta98.CGACG.Modules.PlotSquared7.CubeGenerator.ClickGeneratorFrameEvent;
@@ -26,6 +27,7 @@ public class Main extends JavaPlugin {
     public static Main instance;
     public static ConfigGestion config;
     public static LandsUtils landsUtils;
+    public static LuckyBlockUtils luckyBlockUtils = null;
     private DebugUtils debugUtils = new DebugUtils();
 
     public void onEnable() {
@@ -197,6 +199,7 @@ public class Main extends JavaPlugin {
                 config.getHooks().putIfAbsent("HeroxLuckyBlock", true);
                 Bukkit.getServer().getConsoleSender()
                         .sendMessage("§e[CGACG] §7Added compatibility with HeroxLuckyBlock.");
+                luckyBlockUtils = new LuckyBlockUtils();
                 Bukkit.getServer().getPluginManager().registerEvents(new io.eliotesta98.CGACG.Modules.HeroxLuckyBlock.HeroxLuckyBlockEvents(), this);
             } else {
                 config.getHooks().putIfAbsent("HeroxLuckyBlock", false);

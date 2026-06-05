@@ -5,6 +5,7 @@ import io.eliotesta98.CGACG.Utils.DebugUtils;
 import io.eliotesta98.CubeGenerator.api.CubeGeneratorAPI;
 import me.revils.revenchants.events.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -56,7 +57,9 @@ public class OtherEvents implements Listener {
                         debugUtils.addLine("");
                         debugUtils.addLine("The block mined is an internal block of a generator");
                     }
-                    CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName());
+                    if(!openLuckyBlock(block, event.getPlayer())) {
+                        CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName());
+                    }
                     genFound = true;
                     break;
                 default:
@@ -114,7 +117,9 @@ public class OtherEvents implements Listener {
                         debugUtils.addLine("");
                         debugUtils.addLine("The block mined is an internal block of a generator " + block);
                     }
-                    CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName());
+                    if(!openLuckyBlock(block, event.getPlayer())) {
+                        CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName());
+                    }
                     genFound = true;
                     break;
                 default:
@@ -172,7 +177,9 @@ public class OtherEvents implements Listener {
                         debugUtils.addLine("");
                         debugUtils.addLine("The block mined is an internal block of a generator");
                     }
-                    CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName());
+                    if(!openLuckyBlock(block, event.getPlayer())) {
+                        CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName());
+                    }
                     genFound = true;
                     break;
                 default:
@@ -230,7 +237,9 @@ public class OtherEvents implements Listener {
                         debugUtils.addLine("");
                         debugUtils.addLine("The block mined is an internal block of a generator");
                     }
-                    CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName());
+                    if(!openLuckyBlock(block, event.getPlayer())) {
+                        CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName());
+                    }
                     genFound = true;
                     break;
                 default:
@@ -288,7 +297,9 @@ public class OtherEvents implements Listener {
                         debugUtils.addLine("");
                         debugUtils.addLine("The block mined is an internal block of a generator");
                     }
-                    CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName());
+                    if(!openLuckyBlock(block, event.getPlayer())) {
+                        CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName());
+                    }
                     genFound = true;
                     break;
                 default:
@@ -346,7 +357,9 @@ public class OtherEvents implements Listener {
                         debugUtils.addLine("");
                         debugUtils.addLine("The block mined is an internal block of a generator");
                     }
-                    CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName());
+                    if(!openLuckyBlock(block, event.getPlayer())) {
+                        CubeGeneratorAPI.doBlockBreak(block, itemInHand, event.getPlayer().getName());
+                    }
                     genFound = true;
                     break;
                 default:
@@ -366,5 +379,12 @@ public class OtherEvents implements Listener {
             debugUtils.addLine("");
             debugUtils.debug("RevEnchants Break " + event.getEventName());
         }
+    }
+
+    public boolean openLuckyBlock(Block block, Player player) {
+        if (Main.luckyBlockUtils != null) {
+            return Main.luckyBlockUtils.openLuckyBlock(block, player);
+        }
+        return false;
     }
 }

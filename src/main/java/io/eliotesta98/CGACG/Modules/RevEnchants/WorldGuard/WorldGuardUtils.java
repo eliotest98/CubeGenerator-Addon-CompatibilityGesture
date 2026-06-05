@@ -43,6 +43,8 @@ public class WorldGuardUtils {
             debugUtils.addLine("Informations:");
             debugUtils.addLine("World: " + world.getName());
             debugUtils.addLine("Region Name: " + regionName);
+            debugUtils.addLine("Angle1: " + angle1);
+            debugUtils.addLine("Angle2: " + angle2);
             debugUtils.debug("WorldGuard compatibility");
         }
         RegionManager regionManager = getRegionManager(world);
